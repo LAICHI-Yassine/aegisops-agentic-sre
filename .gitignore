@@ -1,0 +1,23 @@
+# Virtual Environment & Python Bytecode
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment & Secrets
+.env
+.env.local
+
+# Generated Data & Local Databases (Reproducible via scripts/seed_chaos_data.py)
+data/telemetry_parquet/*.parquet
+data/telemetry_parquet/*.duckdb
+data/telemetry_parquet/*.duckdb.wal
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
