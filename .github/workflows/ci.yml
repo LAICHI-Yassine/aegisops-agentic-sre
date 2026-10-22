@@ -1,0 +1,90 @@
+name: AegisOps LLMOps & Agentic CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-and-evaluate:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: aegis_admin
+          POSTGRES_PASSWORD: aegis_secret_pwd
+          POSTGRES_DB: aegisops_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+      qdrant:
+        image: qdrant/qdrant:latest
+        ports:
+          - 6333:6333
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Seed Chaos Telemetry, FinOps DB & Enterprise Runbooks
+        env:
+          POSTGRES_USER: aegis_admin
+          POSTGRES_PASSWORD: aegis_secret_pwd
+          POSTGRES_DB: aegisops_db
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          QDRANT_HOST: localhost
+          QDRANT_PORT: 6333
+          DUCKDB_PATH: data/telemetry_parquet/aegis_telemetry.duckdb
+        run: |
+          export PYTHONPATH=$PWD
+          python scripts/seed_chaos_data.py
+          python scripts/seed_runbooks.py
+          python scripts/verify_hybrid_rag.py
+
+      - name: Run Automated Pytest & Security Guardrail Suite (19 Tests)
+        env:
+          POSTGRES_USER: aegis_admin
+          POSTGRES_PASSWORD: aegis_secret_pwd
+          POSTGRES_DB: aegisops_db
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          QDRANT_HOST: localhost
+          QDRANT_PORT: 6333
+          DUCKDB_PATH: data/telemetry_parquet/aegis_telemetry.duckdb
+        run: |
+          export PYTHONPATH=$PWD
+          pytest -v

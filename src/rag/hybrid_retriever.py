@@ -277,6 +277,6 @@ class AegisHybridRAG:
         }
 
         if use_cache:
-            self.redis.setex(cache_key, 3600, json.dumps(output))
+            self.redis.set(cache_key, json.dumps(output), ex=3600)
 
         return output
