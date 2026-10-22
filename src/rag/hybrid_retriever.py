@@ -94,9 +94,9 @@ class AegisHybridRAG:
             port=int(os.getenv("REDIS_PORT", 6379)),
             decode_responses=True,
         )
-        self.dense_encoder = TextEmbedding(model_name=DENSE_MODEL_NAME)
+        self.dense_encoder = TextEmbedding(model_name=DENSE_MODEL_NAME, cache_dir=".model_cache")
         self.sparse_encoder = BM25SparseEncoder()
-        self.reranker = TextCrossEncoder(model_name=RERANKER_MODEL_NAME)
+        self.reranker = TextCrossEncoder(model_name=RERANKER_MODEL_NAME, cache_dir=".model_cache")
 
     def index_runbooks(self, chunks: List[RunbookChunk] | None = None) -> int:
         if chunks is None:

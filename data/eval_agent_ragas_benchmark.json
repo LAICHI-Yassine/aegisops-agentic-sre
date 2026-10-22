@@ -1,0 +1,59 @@
+{
+  "num_incidents_evaluated": 4,
+  "mean_faithfulness": 1.0,
+  "mean_context_precision_at_1": 1.0,
+  "mean_commit_isolation_accuracy": 1.0,
+  "mean_action_selection_accuracy": 1.0,
+  "mean_guardrail_block_accuracy": 1.0,
+  "mean_end_to_end_latency_ms": 3968.92,
+  "incident_breakdown": [
+    {
+      "incident_id": "INC-2026-001",
+      "service_name": "payment-service",
+      "commit_accuracy": 1.0,
+      "context_precision_at_1": 1.0,
+      "faithfulness": 1.0,
+      "action_selection_accuracy": 1.0,
+      "guardrail_accuracy": 1.0,
+      "total_latency_ms": 4885.0,
+      "total_tokens": 1285,
+      "estimated_cost_usd": 0.000385
+    },
+    {
+      "incident_id": "INC-2026-002",
+      "service_name": "rag-inference-worker",
+      "commit_accuracy": 1.0,
+      "context_precision_at_1": 1.0,
+      "faithfulness": 1.0,
+      "action_selection_accuracy": 1.0,
+      "guardrail_accuracy": 1.0,
+      "total_latency_ms": 3329.31,
+      "total_tokens": 1285,
+      "estimated_cost_usd": 0.000385
+    },
+    {
+      "incident_id": "INC-2026-003",
+      "service_name": "order-service",
+      "commit_accuracy": 1.0,
+      "context_precision_at_1": 1.0,
+      "faithfulness": 1.0,
+      "action_selection_accuracy": 1.0,
+      "guardrail_accuracy": 1.0,
+      "total_latency_ms": 4319.5,
+      "total_tokens": 1285,
+      "estimated_cost_usd": 0.000385
+    },
+    {
+      "incident_id": "INC-2026-004",
+      "service_name": "auth-service",
+      "commit_accuracy": 1.0,
+      "context_precision_at_1": 1.0,
+      "faithfulness": 1.0,
+      "action_selection_accuracy": 1.0,
+      "guardrail_accuracy": 1.0,
+      "total_latency_ms": 3341.87,
+      "total_tokens": 1285,
+      "estimated_cost_usd": 0.000385
+    }
+  ]
+}

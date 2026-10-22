@@ -21,3 +21,6 @@ data/telemetry_parquet/*.duckdb.wal
 .vscode/
 .idea/
 .DS_Store
+# Local ONNX Model Cache & LLMOps Trace Logs
+.model_cache/
+data/llmops_traces.jsonl
