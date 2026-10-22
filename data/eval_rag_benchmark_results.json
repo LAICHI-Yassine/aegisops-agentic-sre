@@ -1,0 +1,27 @@
+{
+  "dense_only": {
+    "mode": "dense_only",
+    "num_queries": 12,
+    "precision_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "mrr_at_3": 1.0,
+    "avg_latency_ms": 34.11
+  },
+  "hybrid_rrf": {
+    "mode": "hybrid_rrf",
+    "num_queries": 12,
+    "precision_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "mrr_at_3": 1.0,
+    "avg_latency_ms": 17.26
+  },
+  "hybrid_reranked": {
+    "mode": "hybrid_reranked",
+    "num_queries": 12,
+    "precision_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "mrr_at_3": 1.0,
+    "avg_latency_ms": 960.59
+  },
+  "redis_warm_cache_avg_latency_ms": 0.28
+}
