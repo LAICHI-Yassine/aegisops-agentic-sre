@@ -1,5 +1,5 @@
 import os
-from typing import Literal, Tuple
+from typing import Any, Literal, Tuple
 from dotenv import load_dotenv
 import psycopg
 from psycopg.rows import dict_row
